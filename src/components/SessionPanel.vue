@@ -27,7 +27,11 @@
             v-show="text !== '' || isFocus"
             @click="sendText(text)"
           >{{ $t('chat.submit') }}</button>
-          <span class="iconfont icon-plus-o" v-show="text === '' && !isFocus" @click.stop="toggleTool"></span>
+          <span
+            class="iconfont icon-plus-o"
+            v-show="text === '' && !isFocus"
+            @click.stop="toggleTool"
+          ></span>
         </div>
         <div class="iChat-expression-btn" @click.stop="toggleExpression">
           <span class="iconfont icon-expression"></span>
@@ -65,102 +69,102 @@
 </template>
 
 <script>
-  import {expressions} from './emoji';
-  import AlterMessage from "./Message";
-  import {EMOJI_BASE_URL} from "./config";
-  export default {
-    name: "SessionPanel",
-    props:{
-      session:{
-        type:Object,
-        default(){
-          return {
-            id:"a000000",
-            name:"聊天室",
-            avatarUrl:"static/img/avatar/group-icon.png",
-            type: "user",
-            deviceType:"pc",
-            ip:"10.24.222.110"
-          }
+import { expressions } from './emoji';
+import AlterMessage from "./Message";
+import { EMOJI_BASE_URL } from "./config";
+export default {
+  name: "SessionPanel",
+  props: {
+    session: {
+      type: Object,
+      default() {
+        return {
+          id: "a000000",
+          name: "聊天室",
+          avatarUrl: "static/img/avatar/group-icon.png",
+          type: "user",
+          deviceType: "pc",
+          ip: "10.24.222.110"
         }
-      }
-    },
-    data(){
-      return {
-        text:"",
-        isFocus:false,
-        isShowTool:false,
-        isShowExpression:false,
-        expressions,
-        baseUrl:EMOJI_BASE_URL
-      }
-    },
-    methods:{
-      pickerExpression(item){
-        this.text+=item.title;
-      },
-      toggleExpression(){
-        let _this=this;
-        function hideExpression() {
-          _this.isShowExpression=false;
-        }
-        if(this.isShowExpression){
-          document.removeEventListener('click',hideExpression)
-        }else {
-          document.addEventListener('click',hideExpression)
-        }
-        this.isShowExpression =!this.isShowExpression;
-        this.isShowTool=false;
-      },
-      toggleTool(){
-        let _this=this;
-        function hideTool() {
-          _this.isShowTool=false;
-        }
-        if(this.isShowTool){
-          document.removeEventListener('click',hideTool)
-        }else {
-          document.addEventListener('click',hideTool)
-        }
-        this.isShowTool =!this.isShowTool;
-        this.isShowExpression=false;
-      },
-      fileChange(e){
-        const reg = /\.(?:png|jpg|jepg)$/i;
-        let file=e.target.files[0];
-        if(!reg.test(file.name)){
-          AlterMessage.warning("请选择正确格式的图片文件!");
-          return
-        }
-        let maxSize=1*1024*1024;
-        if(file.size>maxSize){
-          AlterMessage.warning("图片大小不能超过1M!");
-          return
-        }
-        let reader = new FileReader();
-        reader.readAsDataURL(file); // 读出 base64
-        reader.onloadend =()=> {
-          let html="<img src='"+reader.result+"'>";
-          this.sendMessage(html,'image')
-        };
-      },
-      sendMessage(html,type){
-        this.$emit("sendMessage",html,type,this.session)
-      },
-      sendText(text){
-        text=text.replace(/^\s+|\s+$/g,'');
-        if(text){
-          this.sendMessage(text,'text');
-        }
-        setTimeout(()=>{
-          this.text='';
-        },0)
-      },
-      back(){
-        this.$emit("back")
       }
     }
+  },
+  data() {
+    return {
+      text: "",
+      isFocus: false,
+      isShowTool: false,
+      isShowExpression: false,
+      expressions,
+      baseUrl: EMOJI_BASE_URL
+    }
+  },
+  methods: {
+    pickerExpression(item) {
+      this.text += item.title;
+    },
+    toggleExpression() {
+      let _this = this;
+      function hideExpression() {
+        _this.isShowExpression = false;
+      }
+      if (this.isShowExpression) {
+        document.removeEventListener('click', hideExpression)
+      } else {
+        document.addEventListener('click', hideExpression)
+      }
+      this.isShowExpression = !this.isShowExpression;
+      this.isShowTool = false;
+    },
+    toggleTool() {
+      let _this = this;
+      function hideTool() {
+        _this.isShowTool = false;
+      }
+      if (this.isShowTool) {
+        document.removeEventListener('click', hideTool)
+      } else {
+        document.addEventListener('click', hideTool)
+      }
+      this.isShowTool = !this.isShowTool;
+      this.isShowExpression = false;
+    },
+    fileChange(e) {
+      const reg = /\.(?:png|jpg|jepg)$/i;
+      let file = e.target.files[0];
+      if (!reg.test(file.name)) {
+        AlterMessage.warning("请选择正确格式的图片文件!");
+        return
+      }
+      let maxSize = 1 * 1024 * 1024;
+      if (file.size > maxSize) {
+        AlterMessage.warning("图片大小不能超过1M!");
+        return
+      }
+      let reader = new FileReader();
+      reader.readAsDataURL(file); // 读出 base64
+      reader.onloadend = () => {
+        let html = "<img src='" + reader.result + "'>";
+        this.sendMessage(html, 'image')
+      };
+    },
+    sendMessage(html, type) {
+      this.$emit("sendMessage", html, type, this.session)
+    },
+    sendText(text) {
+      text = text.replace(/^\s+|\s+$/g, '');
+      if (text) {
+        this.sendMessage(text, 'text');
+      }
+      setTimeout(() => {
+        this.text = '';
+      }, 0)
+    },
+    back() {
+      this.$emit("back")
+    }
   }
+}
 </script>
 
 <style scoped>
@@ -292,10 +296,10 @@
   transition: all 0.2s;
 }
 .focus-form .iChat-send-warp {
-  width: 50px;
+  width: 60px;
 }
 .focus-form .iChat-input-warp {
-  margin-right: 60px;
+  margin-right: 70px;
 }
 .iChat-send-btn {
   display: inline-block;
