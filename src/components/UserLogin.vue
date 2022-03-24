@@ -245,7 +245,7 @@ export default {
       this.qq = qq;
     },
     randomName() {
-      this.user.name = "cname";
+      this.user.name = "hi" + String(Date.now()).slice(-4)
     },
     randomAvatar() {
       const len = this.avatarList.length;

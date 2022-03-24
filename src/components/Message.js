@@ -1,59 +1,69 @@
 import Vue from "vue";
-function Notice(msg,type) {
-  let Instance=Vue.extend({
-    render(h){
-      return h('transition',{
-        props:{
-          name:'dialog-slide'
+function Notice(msg, type) {
+  let Instance = Vue.extend({
+    render(h) {
+      return h(
+        "transition",
+        {
+          props: {
+            name: "dialog-slide",
+          },
+          on: {
+            afterLeave: this.delELe,
+          },
         },
-        on:{
-          afterLeave:this.delELe
-        }
-      },[h('div',{
-        class:`alter-message alter-message-${type}`,
-        directives:[
-          {
-            name:'show',
-            value:this.show
-          }
+        [
+          h(
+            "div",
+            {
+              class: `alter-message alter-message-${type}`,
+              directives: [
+                {
+                  name: "show",
+                  value: this.show,
+                },
+              ],
+            },
+            msg
+          ),
         ]
-      },msg)])
+      );
     },
-    data(){
+    data() {
       return {
-        show:false
-      }
+        show: false,
+      };
     },
-    mounted(){
-      let _this=this;
-      this.show=true;
-      this.inter=setTimeout(function () {
-        _this.show=false;
-      },3000)
+    mounted() {
+      let _this = this;
+      this.show = true;
+      this.inter = setTimeout(function () {
+        _this.show = false;
+      }, 3000);
     },
-    methods:{
-      delELe:function () {
-        if(this.inter){
-          clearTimeout(this.inter)
+    methods: {
+      delELe: function () {
+        if (this.inter) {
+          clearTimeout(this.inter);
         }
-        this.$el.remove()
-      }
-    }
+        this.$el.remove();
+      },
+    },
   });
-  document.body.appendChild(new Instance().$mount().$el)
+  document.body.appendChild(new Instance().$mount().$el);
   return Instance;
 }
 export default {
-  info(text){
-    Notice(text,'info');
+  info(text) {
+    Notice(text, "info");
   },
-  error(text){
-    Notice(text,'error');
+  error(text) {
+    Notice(text, "error");
   },
   success(text) {
-    Notice(text,'success');
+    Notice(text, "success");
   },
-  warning(text){
-    Notice(text,'warning');
-  }
-}
+  warning(text) {
+    Notice(text, "warning");
+  },
+};

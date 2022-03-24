@@ -2,7 +2,7 @@
   <div class="session-panel-warp">
     <div class="session-panel-header">
       <img :src="session.avatarUrl" @mousedown.stop alt class="session-avatar" />
-      <span class="session-name">{{session.name}}</span>
+      <span class="session-name">{{ session.name }}</span>
       <slot name="info"></slot>
     </div>
     <div class="session-panel-body">
@@ -22,11 +22,11 @@
             <ul class="emoji-list">
               <li
                 class="emoji-item"
-                v-for="(item,i) in expressions"
+                v-for="(item, i) in expressions"
                 :key="i"
                 @click.stop="pickerEmoji(item)"
               >
-                <img :src="baseUrl+item.url" :alt="item.title" :title="item.title" />
+                <img :src="baseUrl + item.url" :alt="item.title" :title="item.title" />
               </li>
             </ul>
           </div>
@@ -36,89 +36,89 @@
         <textarea class="session-textarea" v-model="text" @keypress.enter="sendText(text)"></textarea>
       </div>
       <div class="session-btn-warp">
-        <button class="session-send-btn" @click="sendText(text)">{{$t('chat.submit')}}</button>
+        <button class="session-send-btn" @click="sendText(text)">{{ $t('chat.submit') }}</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import {expressions} from './emoji';
-  import Message from "./Message";
-  import {EMOJI_BASE_URL} from "./config";
-  export default {
-    name: "UiSessionPanel",
-    props:{
-      session:{
-        type:Object,
-        default(){
-          return {
-            name:"似水流年",
-            avatarUrl: "http://himg.bdimg.com/sys/portrait/item/90193135323338383137313237bc13.jpg"
-          }
+import { expressions } from './emoji';
+import Message from "./Message";
+import { EMOJI_BASE_URL } from "./config";
+export default {
+  name: "UiSessionPanel",
+  props: {
+    session: {
+      type: Object,
+      default() {
+        return {
+          name: "似水流年",
+          avatarUrl: "http://himg.bdimg.com/sys/portrait/item/90193135323338383137313237bc13.jpg"
         }
-      }
-    },
-    data(){
-      return {
-        expressions,
-        baseUrl: EMOJI_BASE_URL,
-        isShow:false,
-        text:""
-      }
-    },
-    methods:{
-      toggleShow() {
-        const vm=this;
-        function hide() {
-          vm.isShow=false;
-          document.removeEventListener('click',hide)
-        }
-        if(vm.isShow){
-          hide()
-        }else {
-          vm.isShow=true;
-          setTimeout(()=>{
-            document.addEventListener('click',hide)
-          },0)
-        }
-      },
-      pickerEmoji(emoji){
-        this.text+=emoji.title;
-      },
-      sendText(text){
-        text=text.replace(/^\s+|\s+$/g,'');
-        if(text){
-          this.sendMessage(text,'text');
-        }
-        setTimeout(()=>{
-          this.text='';
-        },0)
-      },
-      fileChange(e){
-        const reg = /\.(?:png|jpg|jepg)$/i;
-        let file=e.target.files[0];
-        if(!reg.test(file.name)){
-          Message.warning("请选择正确格式的图片文件!");
-          return
-        }
-        let maxSize=1*1024*1024;
-        if(file.size>maxSize){
-          Message.warning("图片大小不能超过1M!","warning");
-          return
-        }
-        let reader = new FileReader();
-        reader.readAsDataURL(file); // 读出 base64
-        reader.onloadend =()=> {
-          let html="<img src='"+reader.result+"'>";
-          this.sendMessage(html,'image')
-        };
-      },
-      sendMessage(content,type){
-        this.$emit("sendMessage",content,type,this.session)
       }
     }
+  },
+  data() {
+    return {
+      expressions,
+      baseUrl: EMOJI_BASE_URL,
+      isShow: false,
+      text: ""
+    }
+  },
+  methods: {
+    toggleShow() {
+      const vm = this;
+      function hide() {
+        vm.isShow = false;
+        document.removeEventListener('click', hide)
+      }
+      if (vm.isShow) {
+        hide()
+      } else {
+        vm.isShow = true;
+        setTimeout(() => {
+          document.addEventListener('click', hide)
+        }, 0)
+      }
+    },
+    pickerEmoji(emoji) {
+      this.text += emoji.title;
+    },
+    sendText(text) {
+      text = text.replace(/^\s+|\s+$/g, '');
+      if (text) {
+        this.sendMessage(text, 'text');
+      }
+      setTimeout(() => {
+        this.text = '';
+      }, 0)
+    },
+    fileChange(e) {
+      const reg = /\.(?:png|jpg|jepg)$/i;
+      let file = e.target.files[0];
+      if (!reg.test(file.name)) {
+        Message.warning("请选择正确格式的图片文件!");
+        return
+      }
+      let maxSize = 1 * 1024 * 1024;
+      if (file.size > maxSize) {
+        Message.warning("图片大小不能超过1M!", "warning");
+        return
+      }
+      let reader = new FileReader();
+      reader.readAsDataURL(file); // 读出 base64
+      reader.onloadend = () => {
+        let html = "<img src='" + reader.result + "'>";
+        this.sendMessage(html, 'image')
+      };
+    },
+    sendMessage(content, type) {
+      this.$emit("sendMessage", content, type, this.session)
+    }
   }
+}
 </script>
 
 <style scoped lang="less">

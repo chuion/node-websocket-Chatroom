@@ -771,9 +771,9 @@ export default {
   font-size: 14px;
   color: #666666;
 }
-.app-setting {
-  max-width: 400px;
-}
+// .app-setting {
+//   max-width: 400px;
+// }
 .ui-list {
   list-style: none;
   padding: 0;

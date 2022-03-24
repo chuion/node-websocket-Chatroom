@@ -26,7 +26,7 @@ let addWord = (word) => {
   parent.set("isEnd", true);
 };
 
-let getMap = async (s) => {
+let getMap = async () => {
   return new Promise((res) => {
     lineReader.on("close", () => res(map));
   });

@@ -9,7 +9,6 @@ io.attach(server);
 //启动服务器
 server.listen(PORT, () => {
   const address = getNetworkIPv4().address;
-  console.log("address: ", address);
   console.info("- Local:   http://localhost:" + PORT);
   console.info(`- Network: http://${address}:` + PORT);
 });

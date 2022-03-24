@@ -1,63 +1,83 @@
-WebChat聊天室
----
+# WebChat聊天室
 
-WebChat聊天室是一个基于nodejs+express+socket.io模块构建的
-网页聊天室工具。前端使用Vue作为前端框架。服务端使用express搭建web服务，使用socket.io
-来创建服务端socket服务，实现了一些基本的聊天功能。
+## 概述
 
-![](https://img.shields.io/github/stars/cleverqin/node-websocket-Chatroom?label=Star&style=flat&logo=github)
-![](https://img.shields.io/github/forks/cleverqin/node-websocket-Chatroom?label=Fork&style=flat&logo=github)
-![](https://img.shields.io/badge/Version-1.0.0-blue)
+WebChat聊天室是一个基于 `NodeJS` + `Express` + `socket.io` 模块构建的网页聊天室工具。前端使用 `Vue2` 作为前端框架。服务端使用`Express` 搭建 web 服务，使用 `socket.io` 来创建服务端 socket 服务，实现了一些基本的聊天功能。
 
-功能介绍
----
-[✔]支持表情发送
+## 功能介绍
 
-[✔]支持键盘回车发送信息
+- [x] **新增：支持多国语言（目前仅设置中英文）**
 
-[✔]支持在线用户统计和用户列表
+- [x] **新增：服务端默认执行脏词过滤**
 
-[✔]支持在线用户搜索
+- [x] 支持表情发送
 
-[✔]支持在线用户的私聊
+- [x] 支持键盘回车发送信息
 
-[✔]支持消息声音提示
+- [x] 支持在线用户统计和用户列表
 
-[✔]支持消息显示设置
+- [x] 支持在线用户搜索
 
-[✔]未读消息条数显示
+- [x] 支持在线用户的私聊
 
-[✔]支持发送小于1M的图片
+- [x] 支持消息声音提示
 
-[✔]支持移动端
+- [x] 支持消息显示设置
 
-相关技术站点
----
-[Vue官方文档](https://cn.vuejs.org/v2/api/)
+- [x] 未读消息条数显示
 
-[Socket.io官方文档](https://socket.io/docs/)
+- [x] 支持发送小于1M的图片
 
-使用手册
----
-1. 下载代码并安装nodejs
-2. 使用`npm install`安装项目依赖模块
-3. 使用`npm run serve`启动开发服务
-4. 使用`npm run prod`启动后台服务
-5. 最后打开浏览器访问 `http://localhost:8080`
-6. 开发完成后打包前端代码`npm run build`
+- [x] 支持移动端
 
-项目预览截图
----
-<img src='./public/static/img/screenshot/screen_01.png' width='400px'>
+## 开发步骤
+```bash
+# 安装依赖
+yarn
 
-<img src='./public/static/img/screenshot/screen_02.png' width='400px'>
+# 运行客户端
+yarn serve
 
-<img src='./public/static/img/screenshot/screen_03.png' width='400px'>
+# 运行服务端
+yarn prod
 
-<img src='./public/static/img/screenshot/screen_04.png' width='400px'>
+# 浏览器访问：http://localhost:8080
+```
 
-<img src='./public/static/img/screenshot/screen_pc_01.png' width='400px'>
+## 第三方库
 
-<img src='./public/static/img/screenshot/screen_pc_02.png' width='400px'>
+### 服务端
 
-<img src='./public/static/img/screenshot/screen_pc_03.png' width='400px'>
+- express
+快速搭建 Web 服务器。
+- socket.io
+服务端 socket.io 库
+- jsonwebtoken
+JWT令牌
+
+### 客户端
+
+- socket.io-client
+客户端 socket.io 库
+- vue-i18n
+Vue 的国际化插件
+
+## 脏词过滤
+
+简单敏感词过滤器，使用DFA实现。
+参考链接：https://github.com/aojiaotage/text-censor
+
+## 项目预览
+<img src='./public/static/img/screenshot/group-pc.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/setting-pc.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/wordfilter-pc.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/emoj-pc.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/group-h5.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/chat-h5.png' width='400px' style="border: 1px solid">
+
+<img src='./public/static/img/screenshot/i18n-h5.png' width='400px' style="border: 1px solid">

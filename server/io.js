@@ -46,7 +46,6 @@ const util = {
     socket.broadcast.emit("system", user, "join");
     socket.on("message", async (from, to, message, type) => {
       message = await filter(message);
-      console.log("message: ", message);
       if (to.type === "user") {
         socket.broadcast
           .to(to.roomId)
