@@ -22,7 +22,12 @@
           <div class="app-user-panel">
             <div class="app-user-form">
               <span class="iconfont icon-search app-form-icon"></span>
-              <input type="text" v-model="keyword" placeholder="搜索" class="app-form-element" />
+              <input
+                type="text"
+                v-model="keyword"
+                :placeholder="$t('search')"
+                class="app-form-element"
+              />
             </div>
             <div class="app-users-warp scroll">
               <div @mousedown.stop>
@@ -49,7 +54,10 @@
               <template slot="info">
                 <span v-if="curSession.type === 'group'" class="app-user-num">({{ users.length }})</span>
                 <span v-if="curSession.type === 'user'" class="app-use-extInfo">
-                  <i class="iconfont" :class="curSession.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"></i>
+                  <i
+                    class="iconfont"
+                    :class="curSession.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"
+                  ></i>
                   <span>({{ curSession.ip }})</span>
                 </span>
               </template>
@@ -71,7 +79,7 @@
         </div>
         <div class="app-container-panel" v-show="curMenu === 'setting'">
           <div class="app-card-panel">
-            <div class="app-card-title">设置</div>
+            <div class="app-card-title">{{ $t('setting.title') }}</div>
             <div class="app-user-card ui-clear" @mousedown.stop>
               <div class="app-card-avatar">
                 <img :src="loginUser.avatarUrl" alt />
@@ -79,7 +87,10 @@
               <div class="app-card-container">
                 <div class="app-card-infoRow">{{ loginUser.name }}</div>
                 <div class="app-card-infoRow">
-                  <i class="iconfont" :class="loginUser.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"></i>
+                  <i
+                    class="iconfont"
+                    :class="loginUser.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"
+                  ></i>
                   <span class="app-login-ip">{{ loginUser.ip }}</span>
                 </div>
                 <div class="app-card-infoRow">
@@ -89,57 +100,20 @@
             </div>
             <ul class="ui-list app-setting" @mousedown.stop>
               <li>
-                <span class="ui-label">消息声音</span>
+                <span class="ui-label">{{ $t('setting.sound') }}</span>
                 <UiSwitch class="ui-right" v-model="setting.isVoice"></UiSwitch>
               </li>
               <li>
-                <span class="ui-label">显示昵称</span>
+                <span class="ui-label">{{ $t('setting.nickname') }}</span>
                 <UiSwitch class="ui-right" v-model="setting.isName"></UiSwitch>
               </li>
               <li>
-                <span class="ui-label">消息时间</span>
+                <span class="ui-label">{{ $t('setting.messageTime') }}</span>
                 <UiSwitch class="ui-right" v-model="setting.isTime"></UiSwitch>
               </li>
-            </ul>
-          </div>
-        </div>
-        <div class="app-container-panel" v-show="curMenu === 'about'">
-          <div class="app-card-panel">
-            <div class="app-card-title">关于</div>
-            <ul class="ui-list app-setting" @mousedown.stop>
               <li>
-                <span class="ui-label">版本：</span>
-                <span class="ui-text">{{ about.version }}</span>
-              </li>
-              <li>
-                <span class="ui-label">协议：</span>
-                <span class="ui-text">{{ about.license }}</span>
-              </li>
-              <li>
-                <span class="ui-label">作者：</span>
-                <span class="ui-text">{{ about.author }}</span>
-              </li>
-              <li>
-                <span class="ui-label">邮箱：</span>
-                <span class="ui-text">{{ about.email }}</span>
-              </li>
-              <li>
-                <span class="ui-label">仓库：</span>
-                <a class="ui-link" :href="about.github" target="_blank">GitHub</a>
-              </li>
-              <li>
-                <a class="ui-link" :href="about.github" target="_blank">
-                  <img
-                    src="https://img.shields.io/github/stars/cleverqin/node-websocket-Chatroom?label=Star&style=flat&logo=github"
-                    alt
-                  />
-                </a>
-                <a class="ui-link" :href="about.github" target="_blank">
-                  <img
-                    src="https://img.shields.io/github/forks/cleverqin/node-websocket-Chatroom?label=Fork&style=flat&logo=github"
-                    alt
-                  />
-                </a>
+                <span class="ui-label">{{ $t('setting.isEnglish') }}</span>
+                <UiSwitch class="ui-right" v-model="setting.isEnglish"></UiSwitch>
               </li>
             </ul>
           </div>
@@ -156,7 +130,12 @@
             </div>
             <div class="iChat-element">
               <span class="iconfont icon-search"></span>
-              <input type="text" v-model="keyword" class="iChat-search-input" placeholder="搜索" />
+              <input
+                type="text"
+                v-model="keyword"
+                class="iChat-search-input"
+                :placeholder="$t('search')"
+              />
             </div>
           </div>
           <div class="iChat-users-warp">
@@ -183,73 +162,41 @@
           </div>
           <ul class="ui-list app-setting" @mousedown.stop>
             <li>
-              <span class="ui-label">用户名</span>
+              <span class="ui-label">{{ $t('setting.username') }}</span>
               <span class="ui-right">{{ loginUser.name }}</span>
             </li>
             <li>
-              <span class="ui-label">登录时间</span>
+              <span class="ui-label">{{ $t('setting.loginTime') }}</span>
               <span class="ui-right">{{ loginUser.time | formatTime }}</span>
             </li>
             <li>
-              <span class="ui-label">IP</span>
+              <span class="ui-label">{{ $t('setting.ip') }}</span>
               <span class="ui-right">{{ loginUser.ip }}</span>
             </li>
             <li>
-              <span class="ui-label">设备</span>
+              <span class="ui-label">{{ $t('setting.device') }}</span>
               <span class="ui-right">
-                <i class="iconfont" :class="loginUser.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"></i>
+                <i
+                  class="iconfont"
+                  :class="loginUser.deviceType === 'pc' ? 'icon-pc' : 'icon-phone'"
+                ></i>
               </span>
             </li>
             <li>
-              <span class="ui-label">消息声音</span>
+              <span class="ui-label">{{ $t('setting.sound') }}</span>
               <UiSwitch class="ui-right" v-model="setting.isVoice"></UiSwitch>
             </li>
             <li>
-              <span class="ui-label">显示昵称</span>
+              <span class="ui-label">{{ $t('setting.nickname') }}</span>
               <UiSwitch class="ui-right" v-model="setting.isName"></UiSwitch>
             </li>
             <li>
-              <span class="ui-label">消息时间</span>
+              <span class="ui-label">{{ $t('setting.messageTime') }}</span>
               <UiSwitch class="ui-right" v-model="setting.isTime"></UiSwitch>
             </li>
-          </ul>
-        </div>
-        <div class="app-iChat-panel" v-show="curMenu === 'about'">
-          <div class="app-card-title">关于</div>
-          <ul class="ui-list app-setting">
             <li>
-              <span class="ui-label">版本：</span>
-              <span class="ui-text">{{ about.version }}</span>
-            </li>
-            <li>
-              <span class="ui-label">协议：</span>
-              <span class="ui-text">{{ about.license }}</span>
-            </li>
-            <li>
-              <span class="ui-label">作者：</span>
-              <span class="ui-text">{{ about.author }}</span>
-            </li>
-            <li>
-              <span class="ui-label">邮箱：</span>
-              <span class="ui-text">{{ about.email }}</span>
-            </li>
-            <li>
-              <span class="ui-label">仓库：</span>
-              <a class="ui-link" :href="about.github" target="_blank">GitHub</a>
-            </li>
-            <li>
-              <a class="ui-link" :href="about.github" target="_blank">
-                <img
-                  src="https://img.shields.io/github/stars/cleverqin/node-websocket-Chatroom?label=Star&style=flat&logo=github"
-                  alt
-                />
-              </a>
-              <a class="ui-link" :href="about.github" target="_blank">
-                <img
-                  src="https://img.shields.io/github/forks/cleverqin/node-websocket-Chatroom?label=Fork&style=flat&logo=github"
-                  alt
-                />
-              </a>
+              <span class="ui-label">{{ $t('setting.isEnglish') }}</span>
+              <UiSwitch class="ui-right" v-model="setting.isEnglish"></UiSwitch>
             </li>
           </ul>
         </div>
@@ -351,29 +298,26 @@ export default {
         });
         return num;
       }
+    },
+    menus() {
+      return [
+        {
+          name: "chat",
+          icon: "iconfont icon-comments",
+          title: this.$t('chat.title')
+        },
+        {
+          name: "setting",
+          icon: "iconfont icon-cog",
+          title: this.$t('setting.title')
+        }
+      ]
     }
   },
   data() {
     const type = getDeviceType(window.navigator.userAgent);
     return {
       appTitle: document.title,
-      menus: [
-        {
-          name: "chat",
-          icon: "iconfont icon-comments",
-          title: "会话"
-        },
-        {
-          name: "setting",
-          icon: "iconfont icon-cog",
-          title: "设置"
-        },
-        {
-          name: "about",
-          icon: "iconfont icon-info",
-          title: "关于"
-        },
-      ],
       curMenu: "chat",
       users: [],
       curSession: {},
@@ -382,14 +326,8 @@ export default {
       setting: {
         isName: true,
         isTime: true,
-        isVoice: true
-      },
-      about: {
-        version: "v1.0",
-        license: "MIT",
-        author: "cleverqin",
-        email: "705597001@qq.com",
-        github: "https://github.com/cleverqin/node-websocket-Chatroom"
+        isVoice: true,
+        isEnglish: false
       },
       loginUser: {},
       token: "",
@@ -398,6 +336,11 @@ export default {
       socketURL: window._HOST || '',
       socket: null,
       isConnect: false
+    }
+  },
+  watch: {
+    'setting.isEnglish'(val) {
+      this.$i18n.locale = val ? 'en' : 'cn'
     }
   },
   mounted() {
@@ -904,10 +847,11 @@ export default {
   margin: 0;
   background-color: #ffffff;
   border-top: 1px solid #d1d1d1;
+  display: flex;
+  justify-content: space-between;
 }
 .iChat-menu-item {
-  float: left;
-  width: 33.3333333%;
+  flex: 1;
   text-align: center;
   color: #666666;
   height: 60px;
