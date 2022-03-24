@@ -21,4 +21,10 @@ export default {
     group: "群聊天室",
     submit: "发送",
   },
+  time: {
+    now: "刚刚",
+    minutesAgo: "分钟前",
+    hoursAgo: "小时前",
+    daysAgo: "天前",
+  },
 };

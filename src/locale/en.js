@@ -21,4 +21,10 @@ export default {
     group: "Group Room",
     submit: "Submit",
   },
+  time: {
+    now: "just now",
+    minutesAgo: " minutes ago",
+    hoursAgo: " hours ago",
+    daysAgo: " days ago",
+  },
 };

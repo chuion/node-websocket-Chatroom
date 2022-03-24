@@ -1,3 +1,4 @@
+import i18n from "@/plugins/i18n";
 export const friendlyTime = (value) => {
   let time = new Date().getTime();
   time = parseInt((time - value) / 1000);
@@ -5,19 +6,19 @@ export const friendlyTime = (value) => {
   let s;
   if (time < 60 * 3) {
     //三分钟内
-    return "刚刚";
+    return i18n.t("time.now");
   } else if (time < 60 * 60 && time >= 60 * 3) {
     //超过十分钟少于1小时
     s = Math.floor(time / 60);
-    return s + "分钟前";
+    return s + i18n.t("time.minutesAgo");
   } else if (time < 60 * 60 * 24 && time >= 60 * 60) {
     //超过1小时少于24小时
     s = Math.floor(time / 60 / 60);
-    return s + "小时前";
+    return s + i18n.t("time.hoursAgo");
   } else if (time < 60 * 60 * 24 * 3 && time >= 60 * 60 * 24) {
     //超过1天少于3天内
     s = Math.floor(time / 60 / 60 / 24);
-    return s + "天前";
+    return s + i18n.t("time.daysAgo");
   } else {
     //超过3天
     let date = new Date(value);
