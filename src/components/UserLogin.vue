@@ -25,11 +25,9 @@
                   />
                   <svg
                     @click.stop="randomQQ"
-                    t="1603258241849"
                     class="icon-touzi"
                     viewBox="0 0 1024 1024"
                     version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
                     p-id="3923"
                     width="200"
                     height="200"
@@ -91,11 +89,9 @@
               />
               <svg
                 @click="randomName"
-                t="1603258241849"
                 class="icon-random"
                 viewBox="0 0 1024 1024"
                 version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
                 p-id="3923"
                 width="200"
                 height="200"

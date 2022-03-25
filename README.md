@@ -76,6 +76,8 @@ Vue 的国际化插件
 
 <img src='./public/static/img/screenshot/emoj-pc.png' width='400px' style="border: 1px solid">
 
+<img src='./public/static/img/screenshot/english-pc.png' width='400px' style="border: 1px solid">
+
 <img src='./public/static/img/screenshot/group-h5.png' width='400px' style="border: 1px solid">
 
 <img src='./public/static/img/screenshot/chat-h5.png' width='400px' style="border: 1px solid">
